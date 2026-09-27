@@ -30,11 +30,15 @@ function parseDateParts(dateText: string): ParsedDate {
     throw new Error(`Invalid date: ${dateText}`);
   }
 
-  const parsedMonth = DateTime.fromFormat(monthName, 'LLLL', {
-    locale: 'en-US',
-    zone: ZONE,
-  });
-  if (!parsedMonth.isValid) {
+  const parsedMonth = ['LLLL', 'LLL']
+    .map((format) =>
+      DateTime.fromFormat(monthName, format, {
+        locale: 'en-US',
+        zone: ZONE,
+      }),
+    )
+    .find((value) => value.isValid);
+  if (!parsedMonth) {
     throw new Error(`Invalid date: ${dateText}`);
   }
 
