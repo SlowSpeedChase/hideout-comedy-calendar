@@ -89,6 +89,12 @@ export function validateEvents(
     if (source.protocol !== 'https:') {
       throw new Error(`Event ${event.title} has a non-HTTPS source URL`);
     }
+    if (event.ticketUrl) {
+      const ticket = new URL(event.ticketUrl);
+      if (ticket.protocol !== 'https:') {
+        throw new Error(`Event ${event.title} has a non-HTTPS ticket URL`);
+      }
+    }
   }
 }
 

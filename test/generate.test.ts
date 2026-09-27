@@ -35,6 +35,35 @@ describe('generateCalendar', () => {
     expect(result.ics).toContain('SUMMARY:Maestro');
     expect(result.ics).toContain('SUMMARY:Shortform Jam');
   });
+
+  test('refuses to replace the feed when the show page is unrecognizable', async () => {
+    await expect(
+      generateCalendar({
+        showsHtml: '<html><body>Temporarily unavailable</body></html>',
+        jamsHtml,
+        generatedAt: DateTime.fromISO('2026-09-27T12:00:00', {
+          zone: 'America/Chicago',
+        }),
+      }),
+    ).rejects.toThrow(/show/i);
+  });
+
+  test('refuses to replace the feed when a populated jam cell is unparseable', async () => {
+    const malformedJams = jamsHtml.replace(
+      '<a href="#shortform-jam">Shortform Jam</a>',
+      'Shortform Jam',
+    );
+
+    await expect(
+      generateCalendar({
+        showsHtml,
+        jamsHtml: malformedJams,
+        generatedAt: DateTime.fromISO('2026-09-27T12:00:00', {
+          zone: 'America/Chicago',
+        }),
+      }),
+    ).rejects.toThrow(/jam cell/i);
+  });
 });
 
 describe('fetchSource', () => {
@@ -54,6 +83,18 @@ describe('fetchSource', () => {
     ).rejects.toThrow(/503/);
   });
 
+  test('instructs the HTTP client to reject redirects before following them', async () => {
+    let redirectMode: RequestRedirect | undefined;
+    await fetchSource('https://hideouttheatre.com/calendar/', {
+      request: async (_input, init) => {
+        redirectMode = init?.redirect;
+        return new Response('<html>ok</html>');
+      },
+    });
+
+    expect(redirectMode).toBe('error');
+  });
+
   test('rejects a response larger than two MiB', async () => {
     await expect(
       fetchSource('https://hideouttheatre.com/calendar/', {
@@ -63,6 +104,27 @@ describe('fetchSource', () => {
           }),
       }),
     ).rejects.toThrow(/too large/i);
+  });
+
+  test('cancels a chunked response as soon as it exceeds two MiB', async () => {
+    let pulls = 0;
+    const body = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        pulls += 1;
+        if (pulls > 4) {
+          controller.close();
+          return;
+        }
+        controller.enqueue(new Uint8Array(1024 * 1024));
+      },
+    });
+
+    await expect(
+      fetchSource('https://hideouttheatre.com/calendar/', {
+        request: async () => new Response(body),
+      }),
+    ).rejects.toThrow(/too large/i);
+    expect(pulls).toBeLessThanOrEqual(4);
   });
 
   test('returns a timestamped source snapshot for an allowed response', async () => {

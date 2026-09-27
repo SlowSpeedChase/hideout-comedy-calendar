@@ -62,13 +62,15 @@ describe('expandJams', () => {
     zone: 'America/Chicago',
   });
 
-  test('expands from the window start through twelve calendar months', () => {
+  test('expands through a full rolling twelve-month window', () => {
     const events = expandJams(parseJamSchedule(snapshot), windowStart, 12);
+    const endBoundary = windowStart.plus({ months: 12 });
 
     expect(events.length).toBeGreaterThan(100);
     expect(events.every(({ start }) => start >= windowStart)).toBe(true);
+    expect(events.every(({ start }) => start < endBoundary)).toBe(true);
     expect(
-      events.every(({ start }) => start < DateTime.fromISO('2027-09-01')),
+      events.some(({ start }) => start.month === 9 && start.year === 2027),
     ).toBe(true);
   });
 

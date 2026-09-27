@@ -19,6 +19,38 @@ export interface FetchSourceOptions {
   request?: RequestFunction;
 }
 
+async function readBoundedBody(response: Response): Promise<Uint8Array> {
+  if (!response.body) return new Uint8Array();
+
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_RESPONSE_BYTES) {
+        await reader.cancel('response size limit exceeded');
+        throw new Error(
+          `Hideout response is too large: over ${MAX_RESPONSE_BYTES} bytes`,
+        );
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  const bytes = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return bytes;
+}
+
 export async function fetchSource(
   inputUrl: string,
   options: FetchSourceOptions = {},
@@ -34,7 +66,7 @@ export async function fetchSource(
       'user-agent':
         'HideoutComedyCalendar/0.1 (+https://github.com/chaseeasterling/hideout-comedy-calendar)',
     },
-    redirect: 'follow',
+    redirect: 'error',
     signal: AbortSignal.timeout(15_000),
   });
   if (!response.ok) {
@@ -52,10 +84,7 @@ export async function fetchSource(
   if (declaredSize > MAX_RESPONSE_BYTES) {
     throw new Error(`Hideout response is too large: ${declaredSize} bytes`);
   }
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > MAX_RESPONSE_BYTES) {
-    throw new Error(`Hideout response is too large: ${bytes.byteLength} bytes`);
-  }
+  const bytes = await readBoundedBody(response);
 
   return {
     url,

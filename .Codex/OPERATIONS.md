@@ -33,10 +33,11 @@ Generate from the live Hideout pages:
 npm run generate -- --output public/hideout-comedy.ics
 ```
 
-Confirm the output contains both source types:
+Confirm the output contains both source types and events:
 
 ```bash
-rg -n "X-HIDEOUT-SOURCE:(show|jam)" public/hideout-comedy.ics
+rg -n "hideouttheatre.com/shows/" public/hideout-comedy.ics
+rg -n "austin-improv-classes/sunday-jams" public/hideout-comedy.ics
 rg -c "BEGIN:VEVENT" public/hideout-comedy.ics
 ```
 

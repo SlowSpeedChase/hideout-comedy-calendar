@@ -9,10 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: read
   contents: read
-  id-token: write
-  pages: write
 
 concurrency:
   group: pages
@@ -20,6 +17,9 @@ concurrency:
 
 jobs:
   build:
+    permissions:
+      contents: read
+      pages: read
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -61,6 +61,10 @@ jobs:
           path: public
 
   deploy:
+    permissions:
+      actions: read
+      id-token: write
+      pages: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

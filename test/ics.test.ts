@@ -122,4 +122,12 @@ describe('validateEvents', () => {
       /zero shows/i,
     );
   });
+
+  test('rejects a non-HTTPS ticket or sign-up URL', () => {
+    expect(() =>
+      validateEvents([event({ ticketUrl: 'javascript:alert(1)' })], {
+        showMarkupDetected: true,
+      }),
+    ).toThrow(/non-HTTPS ticket/i);
+  });
 });

@@ -129,20 +129,32 @@ export function parseJamSchedule(snapshot: SourceSnapshot): JamSchedule {
     cells.slice(1).forEach((cell, columnIndex) => {
       const link = $(cell).find('a[href^="#"]').first();
       const title = normalize(link.text());
-      if (!title) return;
+      if (!title) {
+        if (normalize($(cell).text())) {
+          throw new Error('Populated jam cell has no recognizable anchor link');
+        }
+        return;
+      }
       const range = ranges[columnIndex];
       if (!range) {
         throw new Error(`Jam ${title} has no matching time block`);
       }
       const anchor = link.attr('href')?.slice(1) ?? '';
+      const description = descriptions.get(anchor);
+      if (!description) {
+        throw new Error(`Jam ${title} is missing its matching description`);
+      }
       slots.push({
         ordinal,
         title,
         ...range,
-        description: descriptions.get(anchor) ?? '',
+        description,
       });
     });
   });
+  if (slots.length === 0) {
+    throw new Error('Sunday Jams schedule contains no recognizable jam slots');
+  }
 
   const signInUrl = $('a[href*="docs.google.com"]').first().attr('href');
   return {
@@ -164,16 +176,20 @@ export function expandJams(
     throw new Error(`Invalid month count: ${months}`);
   }
   const startBoundary = windowStart.setZone(ZONE);
+  const endBoundary = startBoundary.plus({ months });
   const firstMonth = startBoundary.startOf('month');
   const events: CalendarEvent[] = [];
 
-  for (let offset = 0; offset < months; offset += 1) {
-    const month = firstMonth.plus({ months: offset });
+  for (
+    let month = firstMonth;
+    month < endBoundary;
+    month = month.plus({ months: 1 })
+  ) {
     for (const slot of schedule.slots) {
       const date = nthSunday(month.year, month.month, slot.ordinal);
       if (!date) continue;
       const start = date.set(slot.start);
-      if (start < startBoundary) continue;
+      if (start < startBoundary || start >= endBoundary) continue;
       let end = date.set(slot.end);
       if (end <= start) end = end.plus({ days: 1 });
       const description = [
