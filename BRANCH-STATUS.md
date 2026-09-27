@@ -1,14 +1,14 @@
 # Branch Status: build-calendar
 
 **Started:** 2026-09-27  
-**Current Stage:** dev  
+**Current Stage:** ready
 **Design:** `docs/superpowers/specs/2026-09-27-hideout-comedy-calendar-design.md`  
 **Plan:** `docs/superpowers/plans/2026-09-27-hideout-comedy-calendar.md`
 
 ## Overview
 
 Build and verify the Hideout Theatre Apple Calendar subscription generator and
-GitHub Pages publishing workflow.
+GitHub Pages publishing workflow, including the minimal subscription page.
 
 ## Dependencies
 
