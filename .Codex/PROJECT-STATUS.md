@@ -1,6 +1,6 @@
 # Project Status
 
-**Status:** release-ready; deployment pending
+**Status:** live
 
 ## Delivered
 
@@ -18,13 +18,8 @@
 - Site: `https://slowspeedchase.github.io/hideout-comedy-calendar/`
 - Feed: `https://slowspeedchase.github.io/hideout-comedy-calendar/hideout-comedy.ics`
 
-The endpoints become active after the repository is created, `main` is pushed,
-and GitHub Pages uses the **GitHub Actions** source.
-
-## Remaining
-
-- Create and publish the GitHub repository
-- Confirm the deployed page and feed
+Both endpoints were verified over HTTPS after GitHub Pages deployment on
+2026-09-27. The deployed feed contained 150 events.
 
 ## Verification evidence
 
