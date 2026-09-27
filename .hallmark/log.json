@@ -3,6 +3,18 @@
   "runs": [
     {
       "date": "2026-09-27",
+      "genre": "editorial",
+      "macrostructure": "Index-First",
+      "theme": "Almanac",
+      "enrichment": "none",
+      "nav": "none",
+      "footer": "none",
+      "tone": "utilitarian",
+      "audience": "Apple-device owner",
+      "use": "subscribe to Hideout Comedy"
+    },
+    {
+      "date": "2026-09-27",
       "genre": "playful",
       "macrostructure": "Narrative Workflow",
       "theme": "Hum",
