@@ -33,6 +33,7 @@
 ### Task 1: Project Foundation and Event Model
 
 **Files:**
+
 - Create: `package.json`
 - Create: `tsconfig.json`
 - Create: `eslint.config.js`
@@ -42,6 +43,7 @@
 - Test: `test/time.test.ts`
 
 **Interfaces:**
+
 - Produces: `CalendarEvent`, `EventKind`, `SourceSnapshot`, and `parseLocalDateTime(dateText, timeText, retrievedAt): DateTime`.
 - Produces: `nthSunday(year, month, ordinal): DateTime | null` for later jam expansion.
 
@@ -72,11 +74,13 @@ Commit: `feat(core): add event model and time helpers`
 ### Task 2: Hideout Show Parser
 
 **Files:**
+
 - Create: `src/shows.ts`
 - Create: `test/fixtures/shows.html`
 - Test: `test/shows.test.ts`
 
 **Interfaces:**
+
 - Consumes: `CalendarEvent` and `parseLocalDateTime` from Task 1.
 - Produces: `parseShows(snapshot: SourceSnapshot): CalendarEvent[]`.
 
@@ -107,11 +111,13 @@ Commit: `feat(shows): parse Hideout show listings`
 ### Task 3: Sunday Jam Parser and Expansion
 
 **Files:**
+
 - Create: `src/jams.ts`
 - Create: `test/fixtures/jams.html`
 - Test: `test/jams.test.ts`
 
 **Interfaces:**
+
 - Consumes: `CalendarEvent`, `SourceSnapshot`, and `nthSunday` from Task 1.
 - Produces: `parseJamSchedule(snapshot): JamSchedule` and `expandJams(schedule, windowStart, months): CalendarEvent[]`.
 
@@ -142,6 +148,7 @@ Commit: `feat(jams): expand the Sunday Jam rotation`
 ### Task 4: ICS Renderer, Validation, and CLI
 
 **Files:**
+
 - Create: `src/ics.ts`
 - Create: `src/fetch.ts`
 - Create: `src/generate.ts`
@@ -150,6 +157,7 @@ Commit: `feat(jams): expand the Sunday Jam rotation`
 - Test: `test/generate.test.ts`
 
 **Interfaces:**
+
 - Consumes: show and jam parser interfaces from Tasks 2 and 3.
 - Produces: `renderCalendar(events, generatedAt): string`, `validateEvents(events, sourceSignals): void`, and `generateCalendar(options): Promise<GeneratedCalendar>`.
 - Produces CLI: `npm run generate -- --output public/hideout-comedy.ics` with optional fixture paths for deterministic tests.
@@ -181,6 +189,7 @@ Commit: `feat(feed): generate a validated calendar subscription`
 ### Task 5: GitHub Pages Delivery and User Documentation
 
 **Files:**
+
 - Create: `.github/workflows/verify.yml`
 - Create: `.github/workflows/publish.yml`
 - Create: `scripts/build-site.ts`
@@ -194,6 +203,7 @@ Commit: `feat(feed): generate a validated calendar subscription`
 - Test: `test/site.test.ts`
 
 **Interfaces:**
+
 - Consumes: the CLI from Task 4.
 - Produces: a Pages artifact containing `index.html` and `hideout-comedy.ics`, plus scheduled/manual publishing and Apple subscription instructions.
 
@@ -228,11 +238,13 @@ Commit: `feat(deploy): publish the Apple Calendar feed`
 ### Task 6: Final Review and Release Readiness
 
 **Files:**
+
 - Modify: `BRANCH-STATUS.md`
 - Modify: `.Codex/PROJECT-STATUS.md`
 - Modify: `docs/plans/INDEX.md`
 
 **Interfaces:**
+
 - Consumes: the complete project.
 - Produces: review-ready branch with evidence for every acceptance criterion.
 

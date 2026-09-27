@@ -171,4 +171,3 @@ routine tests depend on Hideout availability.
       removes repeated website checking
 - [x] Scope check passed: one focused generator and deployment workflow
 - [x] No design blockers
-

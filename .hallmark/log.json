@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "date": "2026-09-27",
+      "genre": "playful",
+      "macrostructure": "Narrative Workflow",
+      "theme": "Hum",
+      "enrichment": "none",
+      "nav": "N7",
+      "footer": "Ft5",
+      "tone": "playful-utilitarian",
+      "audience": "Apple-device owner",
+      "use": "subscribe to Hideout Comedy",
+      "deliberateException": "A tilted CSS calendar mark crosses the strict reading grid to make the utility feel specific to a live comedy schedule."
+    }
+  ]
+}

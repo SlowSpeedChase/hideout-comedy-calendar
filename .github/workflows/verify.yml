@@ -1,0 +1,36 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run all checks
+        run: npm run verify
+
+      - name: Build fixture-backed Pages artifact
+        run: |
+          npm run build:site
+          npm run generate -- --shows test/fixtures/shows.html --jams test/fixtures/jams.html --output public/hideout-comedy.ics
+          test -s public/index.html
+          test -s public/hideout-comedy.ics
