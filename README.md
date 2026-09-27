@@ -11,11 +11,11 @@ GitHub Actions, so no Mac needs to stay awake.
 
 Open the hosted page:
 
-**https://chaseeasterling.github.io/hideout-comedy-calendar/**
+**https://slowspeedchase.github.io/hideout-comedy-calendar/**
 
 Or use the feed directly:
 
-**https://chaseeasterling.github.io/hideout-comedy-calendar/hideout-comedy.ics**
+**https://slowspeedchase.github.io/hideout-comedy-calendar/hideout-comedy.ics**
 
 ### iPhone or iPad
 

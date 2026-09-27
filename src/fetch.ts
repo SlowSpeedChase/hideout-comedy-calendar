@@ -64,7 +64,7 @@ export async function fetchSource(
   const response = await request(url, {
     headers: {
       'user-agent':
-        'HideoutComedyCalendar/0.1 (+https://github.com/chaseeasterling/hideout-comedy-calendar)',
+        'HideoutComedyCalendar/0.1 (+https://github.com/SlowSpeedChase/hideout-comedy-calendar)',
     },
     redirect: 'error',
     signal: AbortSignal.timeout(15_000),

@@ -2,8 +2,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
-const defaultBaseUrl =
-  'https://chaseeasterling.github.io/hideout-comedy-calendar/';
+export const DEFAULT_BASE_URL =
+  'https://slowspeedchase.github.io/hideout-comedy-calendar/';
 
 export interface SiteFiles {
   html: string;
@@ -701,7 +701,7 @@ h1 {
 
 async function main(): Promise<void> {
   const outputDirectory = path.resolve(process.argv[2] ?? 'public');
-  const site = buildSite(process.env.CALENDAR_BASE_URL ?? defaultBaseUrl);
+  const site = buildSite(process.env.CALENDAR_BASE_URL ?? DEFAULT_BASE_URL);
 
   await mkdir(outputDirectory, { recursive: true });
   await Promise.all([

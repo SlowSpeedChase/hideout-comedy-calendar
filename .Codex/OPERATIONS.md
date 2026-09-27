@@ -43,15 +43,15 @@ rg -c "BEGIN:VEVENT" public/hideout-comedy.ics
 
 ## GitHub Pages setup
 
-1. Create the public repository `chaseeasterling/hideout-comedy-calendar`.
+1. Create the public repository `SlowSpeedChase/hideout-comedy-calendar`.
 2. Push `main`.
 3. Open **Settings → Pages**.
 4. Set **Source** to **GitHub Actions**.
 5. Run **Actions → Publish calendar → Run workflow** if the push run did not
    start automatically.
 6. Verify the page and feed:
-   - `https://chaseeasterling.github.io/hideout-comedy-calendar/`
-   - `https://chaseeasterling.github.io/hideout-comedy-calendar/hideout-comedy.ics`
+   - `https://slowspeedchase.github.io/hideout-comedy-calendar/`
+   - `https://slowspeedchase.github.io/hideout-comedy-calendar/hideout-comedy.ics`
 
 ## Manual refresh
 

@@ -1,11 +1,15 @@
 import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
 
-import { buildSite } from '../scripts/build-site.js';
+import { buildSite, DEFAULT_BASE_URL } from '../scripts/build-site.js';
 
-const baseUrl = 'https://chaseeasterling.github.io/hideout-comedy-calendar/';
+const baseUrl = 'https://slowspeedchase.github.io/hideout-comedy-calendar/';
 
 describe('buildSite', () => {
+  it('defaults to the public SlowSpeedChase Pages project', () => {
+    expect(DEFAULT_BASE_URL).toBe(baseUrl);
+  });
+
   it('builds a semantic Apple Calendar subscription page', () => {
     const site = buildSite(baseUrl);
     const $ = load(site.html);

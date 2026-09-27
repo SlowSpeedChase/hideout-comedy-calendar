@@ -15,8 +15,8 @@
 
 ## Public endpoints
 
-- Site: `https://chaseeasterling.github.io/hideout-comedy-calendar/`
-- Feed: `https://chaseeasterling.github.io/hideout-comedy-calendar/hideout-comedy.ics`
+- Site: `https://slowspeedchase.github.io/hideout-comedy-calendar/`
+- Feed: `https://slowspeedchase.github.io/hideout-comedy-calendar/hideout-comedy.ics`
 
 The endpoints become active after the repository is created, `main` is pushed,
 and GitHub Pages uses the **GitHub Actions** source.
@@ -29,7 +29,7 @@ and GitHub Pages uses the **GitHub Actions** source.
 ## Verification evidence
 
 - Clean dependency install completed with Node.js 22
-- Formatting, lint, type checking, build, and 46 tests pass
+- Formatting, lint, type checking, build, and 47 tests pass
 - Live generation produced 150 unique events through September 26, 2027
 - Representative show and jam events retain correct Austin wall-clock times
 - ICS uses CRLF, folds at 75 bytes, and contains no alarms
