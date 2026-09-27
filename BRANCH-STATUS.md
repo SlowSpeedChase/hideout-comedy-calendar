@@ -58,4 +58,3 @@ GitHub Pages publishing workflow.
 ## Blocked Items
 
 - GitHub deployment requires creation of the remote repository and enabling Pages.
-
