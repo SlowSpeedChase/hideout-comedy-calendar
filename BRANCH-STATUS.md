@@ -25,24 +25,24 @@ GitHub Pages publishing workflow.
 
 ## Development
 
-- [ ] Event model and time helpers
-- [ ] Show parser
-- [ ] Sunday Jam parser and expansion
-- [ ] ICS renderer and generator CLI
-- [ ] Pages site and workflows
+- [x] Event model and time helpers
+- [x] Show parser
+- [x] Sunday Jam parser and expansion
+- [x] ICS renderer and generator CLI
+- [x] Pages site and workflows
 
 ## Testing
 
-- [ ] Unit and integration tests pass
-- [ ] Live source smoke test passes
-- [ ] Generated feed inspected
+- [x] Unit and integration tests pass
+- [x] Live source smoke test passes
+- [x] Generated feed inspected
 - [ ] Final verification evidence recorded
 
 ## Documentation
 
-- [ ] README and operations guide complete
-- [ ] Project status current
-- [ ] Plan index current
+- [x] README and operations guide complete
+- [x] Project status current
+- [x] Plan index current
 
 ## Review
 
@@ -57,4 +57,4 @@ GitHub Pages publishing workflow.
 
 ## Blocked Items
 
-- GitHub deployment requires creation of the remote repository and enabling Pages.
+None.

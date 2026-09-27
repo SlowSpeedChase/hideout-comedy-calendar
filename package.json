@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "build:site": "npm run build --silent && node dist/scripts/build-site.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "generate": "npm run build --silent && node dist/src/cli.js",
