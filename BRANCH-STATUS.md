@@ -36,7 +36,7 @@ GitHub Pages publishing workflow.
 - [x] Unit and integration tests pass
 - [x] Live source smoke test passes
 - [x] Generated feed inspected
-- [ ] Final verification evidence recorded
+- [x] Final verification evidence recorded
 
 ## Documentation
 
@@ -46,14 +46,14 @@ GitHub Pages publishing workflow.
 
 ## Review
 
-- [ ] Whole-branch review complete
-- [ ] Actionable feedback addressed
+- [x] Whole-branch review complete
+- [x] Actionable feedback addressed
 
 ## Ready
 
-- [ ] Rebased on latest main
-- [ ] Final test pass complete
-- [ ] Ready for merge or PR
+- [x] Rebased on latest main
+- [x] Final test pass complete
+- [x] Ready for merge or PR
 
 ## Blocked Items
 
