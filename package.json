@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "generate": "tsx src/cli.ts",
+    "generate": "npm run build --silent && node dist/src/cli.js",
     "lint": "eslint .",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
@@ -26,7 +26,6 @@
     "@types/node": "^26.6.3",
     "eslint": "^10.11.0",
     "prettier": "^3.9.9",
-    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.1",
     "vitest": "^5.0.2"
